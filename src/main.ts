@@ -1,12 +1,59 @@
 const portrait = document.querySelector<HTMLDivElement>("#portrait")!;
 const spin = document.querySelector<HTMLButtonElement>("#spin")!;
-
 // The prototype grew inline. Keep it this way until the refactoring checkpoint.
 const face = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 face.setAttribute("viewBox", "0 0 200 200");
 face.setAttribute("role", "img");
-face.setAttribute("aria-label", "A neutral face");
+face.setAttribute("aria-label", "A face with a colorful background and curved smile");
 
+// Create the blue to purple gradient
+const defs = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "defs",
+);
+
+const gradient = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "linearGradient",
+);
+gradient.setAttribute("id", "background-gradient");
+gradient.setAttribute("x1", "0%");
+gradient.setAttribute("y1", "0%");
+gradient.setAttribute("x2", "100%");
+gradient.setAttribute("y2", "0%");
+
+const firstStop = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "stop",
+);
+firstStop.setAttribute("offset", "0%");
+firstStop.setAttribute("stop-color", "#00cfff");
+gradient.append(firstStop);
+
+const secondStop = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "stop",
+);
+secondStop.setAttribute("offset", "100%");
+secondStop.setAttribute("stop-color", "#8a2be2");
+gradient.append(secondStop);
+
+defs.append(gradient);
+face.append(defs);
+
+// Add the gradient background before the head
+const background = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "rect",
+);
+background.setAttribute("x", "0");
+background.setAttribute("y", "0");
+background.setAttribute("width", "200");
+background.setAttribute("height", "200");
+background.setAttribute("fill", "url(#background-gradient)");
+face.append(background);
+
+// Create the head.
 const head = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
 head.setAttribute("cx", "100");
 head.setAttribute("cy", "100");
@@ -49,11 +96,13 @@ nose.setAttribute("stroke-width", "4");
 nose.setAttribute("stroke-linecap", "round");
 face.append(nose);
 
-const mouth = document.createElementNS("http://www.w3.org/2000/svg", "line");
-mouth.setAttribute("x1", "75");
-mouth.setAttribute("y1", "137");
-mouth.setAttribute("x2", "125");
-mouth.setAttribute("y2", "137");
+// draw a curved smile using a quadratic bezier curve.
+const mouth = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "path",
+);
+mouth.setAttribute("d", "M 70 130 Q 100 155 130 130");
+mouth.setAttribute("fill", "none");
 mouth.setAttribute("stroke", "#302c29");
 mouth.setAttribute("stroke-width", "4");
 mouth.setAttribute("stroke-linecap", "round");
