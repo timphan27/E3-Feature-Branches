@@ -17,3 +17,7 @@
 - Use a blue-to-purple gradient background and a Bézier curve for the character's smile.
 - **Criterion:** I want it to look very colorful.
   Result: I added a blue that faded to purple for the entire background. I also used a bezier curve to construct the smile.
+
+## Final
+
+I chose branch A because the freckles make the face more detailed and meet my criterion of looking clear at a small size. Branch B added a cloud and flower, while branch C used a colorful gradient and curved smile. Branches B and C remain unchanged as records of the other alternatives.
