@@ -1,7 +1,7 @@
 const portrait = document.querySelector<HTMLDivElement>("#portrait")!;
 const spin = document.querySelector<HTMLButtonElement>("#spin")!;
 
-// Build and return the neutral face.
+// Build and return the face with freckles.
 function buildFace() {
   const face = document.createElementNS(
     "http://www.w3.org/2000/svg",
@@ -9,7 +9,7 @@ function buildFace() {
   );
   face.setAttribute("viewBox", "0 0 200 200");
   face.setAttribute("role", "img");
-  face.setAttribute("aria-label", "A neutral face");
+  face.setAttribute("aria-label", "A face covered in freckles");
 
   const head = document.createElementNS(
     "http://www.w3.org/2000/svg",
@@ -71,6 +71,34 @@ function buildFace() {
   mouth.setAttribute("stroke-width", "4");
   mouth.setAttribute("stroke-linecap", "round");
   face.append(mouth);
+
+  // Add 60 freckles to each cheek.
+  for (let i = 0; i < 60; i++) {
+    const row = Math.floor(i / 10);
+    const col = i % 10;
+
+    // Left cheek.
+    const leftFreckle = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "circle",
+    );
+    leftFreckle.setAttribute("cx", String(48 + col * 3));
+    leftFreckle.setAttribute("cy", String(112 + row * 3));
+    leftFreckle.setAttribute("r", "1.5");
+    leftFreckle.setAttribute("fill", "#8b4b27");
+    face.append(leftFreckle);
+
+    // Right cheek.
+    const rightFreckle = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "circle",
+    );
+    rightFreckle.setAttribute("cx", String(122 + col * 3));
+    rightFreckle.setAttribute("cy", String(112 + row * 3));
+    rightFreckle.setAttribute("r", "1.5");
+    rightFreckle.setAttribute("fill", "#8b4b27");
+    face.append(rightFreckle);
+  }
 
   return face;
 }
