@@ -1,11 +1,25 @@
 const portrait = document.querySelector<HTMLDivElement>("#portrait")!;
 const spin = document.querySelector<HTMLButtonElement>("#spin")!;
+import cloudUrl from "./assets/cloud.svg?no-inline";
+import flowerUrl from "./assets/flower.svg?no-inline";
 
 // The prototype grew inline. Keep it this way until the refactoring checkpoint.
 const face = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 face.setAttribute("viewBox", "0 0 200 200");
 face.setAttribute("role", "img");
-face.setAttribute("aria-label", "A neutral face");
+face.setAttribute("aria-label", "A face with a cloud background and flower");
+
+// cloud svg was created by me
+const cloud = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "image",
+);
+cloud.setAttribute("href", cloudUrl);
+cloud.setAttribute("x", "0");
+cloud.setAttribute("y", "0");
+cloud.setAttribute("width", "200");
+cloud.setAttribute("height", "200");
+face.append(cloud);
 
 const head = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
 head.setAttribute("cx", "100");
@@ -58,6 +72,18 @@ mouth.setAttribute("stroke", "#302c29");
 mouth.setAttribute("stroke-width", "4");
 mouth.setAttribute("stroke-linecap", "round");
 face.append(mouth);
+
+//flower svg, created by me
+const flower = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "image",
+);
+flower.setAttribute("href", flowerUrl);
+flower.setAttribute("x", "145");
+flower.setAttribute("y", "140");
+flower.setAttribute("width", "40");
+flower.setAttribute("height", "40");
+face.append(flower);
 
 portrait.append(face);
 
